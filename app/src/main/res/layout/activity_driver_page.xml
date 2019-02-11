@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#320357"
+    tools:context=".activities.activity.PrincipalPage">
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/professions_driver_512" />
+
+    <LinearLayout
+        android:id="@+id/lin1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img1"
+        android:layout_alignLeft="@+id/img1"
+        android:layout_marginLeft="-80dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Driver Name:"
+            android:textColor="#0884F9"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginRight="50dp"
+            android:background="#ffffff"
+            android:inputType="text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lin1"
+        android:layout_alignLeft="@+id/img1"
+        android:layout_marginLeft="-80dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password:"
+            android:textColor="#0884F9"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginRight="50dp"
+            android:background="#ffffff"
+            android:inputType="text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/driverloginbtn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/btndesign"
+        android:layout_marginRight="42dp"
+        android:layout_marginLeft="42dp"
+        android:text="Login"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:drawableRight="@drawable/multimedia"
+        android:layout_below="@+id/lin2"
+        android:paddingRight="10dp"
+        android:layout_marginTop="50dp"/>
+    <Button
+        android:id="@+id/lo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#D74B4B"
+        android:text="Forgot Password"
+        android:textAllCaps="false"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_below="@+id/driverloginbtn"
+        android:layout_alignRight="@+id/driverloginbtn"/>
+</RelativeLayout>

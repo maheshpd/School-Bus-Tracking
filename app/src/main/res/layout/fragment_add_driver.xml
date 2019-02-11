@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D7866F6F"
+    tools:context=".activities.fragment.AddDriver">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/fragment_bg">
+
+
+        <TextView
+            android:id="@+id/addtextdrv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Add Driver"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/addtextdrv1"
+            android:layout_alignLeft="@+id/addtextdrv1"
+            android:layout_marginRight="20dp"
+            android:background="#817D7D" />
+
+        <EditText
+            android:id="@+id/busno"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/view1"
+            android:layout_alignLeft="@+id/view1"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edt_design"
+            android:hint="Bus No."
+            android:inputType="text|number"
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:id="@+id/drivername"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/busno"
+            android:layout_alignLeft="@+id/view1"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edt_design"
+            android:hint="Driver's Name."
+            android:inputType="text"
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:id="@+id/phnno"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/drivername"
+            android:layout_alignLeft="@+id/view1"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edt_design"
+            android:hint="Driver's Contact."
+            android:inputType="text"
+            android:paddingLeft="10dp" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/phnno"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/submit" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
