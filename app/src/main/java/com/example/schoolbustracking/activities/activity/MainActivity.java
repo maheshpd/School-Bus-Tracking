@@ -19,6 +19,7 @@ import com.example.schoolbustracking.activities.fragment.AddDriver;
 import com.example.schoolbustracking.activities.fragment.BusDetails;
 import com.example.schoolbustracking.activities.fragment.Notice;
 import com.example.schoolbustracking.activities.fragment.RegisterStudent;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseApp.initializeApp(MainActivity.this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddDriver()).commit();
 
