@@ -12,10 +12,10 @@ import com.example.schoolbustracking.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Notice extends Fragment {
+public class TrackLocation extends Fragment {
 
 
-    public Notice() {
+    public TrackLocation() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Notice extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notice, container, false);
+        return inflater.inflate(R.layout.fragment_track_location, container, false);
     }
 
 }

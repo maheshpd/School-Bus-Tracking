@@ -4,91 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.activity.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context=".activities.activity.ParentMainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imag"
+            android:id="@+id/img2"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:src="@drawable/map" />
 
         <LinearLayout
-            android:id="@+id/main_lin"
+            android:id="@+id/main_line2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imag"
+            android:layout_below="@id/img2"
             android:background="#BBB4B4"
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="4">
 
-
             <Button
-                android:id="@+id/adddrvbtn"
+                android:id="@+id/track_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="#444242"
+                android:text="Track Location"
                 android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="#444242"
-                android:padding="8dp"
-                android:text="Add Driver"
                 android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/std_reg_btn"
+                android:id="@+id/change_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
                 android:background="#444242"
-                android:padding="8dp"
-                android:text="Register Student"
+                android:text="Change Password"
                 android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/bs_det"
+                android:id="@+id/give_feedback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="2dp"
+                android:background="#444242"
+                android:text="Give Feedback"
                 android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="#444242"
-                android:padding="8dp"
-                android:text="Bus Details"
                 android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
-
+                android:textColor="@android:color/white" />
             <Button
-                android:id="@+id/noti"
+                android:id="@+id/logout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
                 android:background="#444242"
-                android:padding="8dp"
-                android:text="Notice"
+                android:text="Log Out"
+                android:layout_marginTop="8dp"
                 android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/main_lin" />
+            android:id="@+id/parent_main_container"
+            android:layout_below="@+id/main_line2"/>
     </RelativeLayout>
 </ScrollView>
