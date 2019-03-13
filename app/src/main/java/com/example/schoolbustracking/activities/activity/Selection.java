@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.schoolbustracking.R;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Selection extends AppCompatActivity {
 Button principal_btn,parents_btn,driver_btn;
@@ -14,6 +15,9 @@ Button principal_btn,parents_btn,driver_btn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Notice");
+
 
         principal_btn=findViewById(R.id.principalbutton);
         parents_btn=findViewById(R.id.parentbutton);

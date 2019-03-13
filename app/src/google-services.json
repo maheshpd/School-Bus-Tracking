@@ -176,14 +176,6 @@
           }
         },
         {
-          "client_id": "1048292651542-52g6g32v948oeshhh1n471dkmcrb8hqt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.schoolbustracking",
-            "certificate_hash": "055c040555477ccd81f98f1db8b740ffcce46fb2"
-          }
-        },
-        {
           "client_id": "1048292651542-g2t71pmmijm1j286j7gar869m5j34jl5.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -19,7 +19,7 @@ public class DriverPage extends AppCompatActivity {
         driver_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DriverPage.this, MainActivity.class));
+                startActivity(new Intent(DriverPage.this, DriverMap.class));
             }
         });
     }

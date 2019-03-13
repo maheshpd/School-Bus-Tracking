@@ -19,7 +19,7 @@ public class ParentPage extends AppCompatActivity {
         parent_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ParentPage.this, MainActivity.class));
+                startActivity(new Intent(ParentPage.this, ParentMainActivity.class));
             }
         });
     }
