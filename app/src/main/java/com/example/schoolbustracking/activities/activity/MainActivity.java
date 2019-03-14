@@ -1,5 +1,6 @@
 package com.example.schoolbustracking.activities.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -121,7 +122,11 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        }else if (id == R.id.nav_feedback){
+            startActivity(new Intent(MainActivity.this,PrincipleFeedback.class));
+        }
+
+        else if (id == R.id.nav_slideshow) {
 
         }
 

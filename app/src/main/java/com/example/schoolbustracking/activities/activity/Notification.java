@@ -36,7 +36,8 @@ public class Notification extends AppCompatActivity {
         //Widget
         notificationRecyView = findViewById(R.id.notification_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+//        layoutManager.setStackFromEnd(true);
         notificationRecyView.setLayoutManager(layoutManager);
 
     }

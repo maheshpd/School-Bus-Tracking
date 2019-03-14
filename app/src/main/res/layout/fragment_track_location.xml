@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/fragment_bg"
         android:orientation="vertical">
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="Bus Number"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -29,6 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="8dp"
+            android:autofillHints="Bus Number"
+            android:inputType="text"
             android:background="@drawable/edt_design"
             android:hint="Bus Number"
             android:paddingLeft="18dp" />
@@ -40,7 +43,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/trackbus" />
+            android:src="@drawable/trackbus"
+            android:contentDescription="@null"/>
     </LinearLayout>
 
 </RelativeLayout>

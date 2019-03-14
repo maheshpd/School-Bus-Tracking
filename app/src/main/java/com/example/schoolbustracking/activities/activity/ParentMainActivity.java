@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.schoolbustracking.R;
+import com.example.schoolbustracking.activities.fragment.AddDriver;
+import com.example.schoolbustracking.activities.fragment.ChangePassword;
+import com.example.schoolbustracking.activities.fragment.Feedback;
+import com.example.schoolbustracking.activities.fragment.TrackLocation;
 
 public class ParentMainActivity extends AppCompatActivity {
 
@@ -23,6 +28,35 @@ public class ParentMainActivity extends AppCompatActivity {
         givefeedbackbtn = findViewById(R.id.give_feedback);
         logoutbtn = findViewById(R.id.logout);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.parent_main_container, new TrackLocation()).commit();
+
+        trackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.parent_main_container, new TrackLocation()).commit();
+            }
+        });
+
+        changeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.parent_main_container, new ChangePassword()).commit();
+            }
+        });
+
+        givefeedbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.parent_main_container, new Feedback()).commit();
+            }
+        });
+
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
