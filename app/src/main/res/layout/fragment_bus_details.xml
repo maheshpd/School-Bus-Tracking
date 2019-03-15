@@ -35,64 +35,14 @@
             android:layout_marginRight="20dp"
             android:background="#817D7D" />
 
-        <LinearLayout
-            android:id="@+id/main_lin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/view1"
-            android:padding="10dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="#444242"
-               android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Add Driver"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:background="#444242"
-                android:padding="8dp"
-                android:text="Register Student"
-                android:layout_marginTop="8dp"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="#444242"
-                android:padding="8dp"
-                android:text="Bus Details"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
-
-        </LinearLayout>
         <android.support.v7.widget.RecyclerView
-            android:layout_below="@+id/main_lin"
+            android:id="@+id/recyclerview_busdetails"
             android:layout_width="match_parent"
-
+            android:layout_height="500dp"
+            android:layout_below="@+id/view1"
             android:layout_marginTop="10dp"
-            android:layout_height="500dp"/>
+            android:clipToPadding="true"
+            android:scrollbars="vertical" />
 
     </RelativeLayout>
 

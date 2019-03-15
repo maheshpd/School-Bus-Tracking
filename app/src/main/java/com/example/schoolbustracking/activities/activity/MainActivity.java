@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("School Bus Tacking");
 
         FirebaseApp.initializeApp(MainActivity.this);
 
@@ -122,11 +124,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        }else if (id == R.id.nav_feedback){
-            startActivity(new Intent(MainActivity.this,PrincipleFeedback.class));
-        }
-
-        else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_feedback) {
+            startActivity(new Intent(MainActivity.this, PrincipleFeedback.class));
+        } else if (id == R.id.nav_slideshow) {
 
         }
 
@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }

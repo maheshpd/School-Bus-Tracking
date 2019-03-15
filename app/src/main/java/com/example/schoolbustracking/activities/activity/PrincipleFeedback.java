@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class PrincipleFeedback extends AppCompatActivity {
     DatabaseReference myRef;
     RecyclerView feedbackRecyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,6 @@ public class PrincipleFeedback extends AppCompatActivity {
         //Widget
         feedbackRecyView = findViewById(R.id.feedback_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setReverseLayout(true);
 //        layoutManager.setStackFromEnd(true);
         feedbackRecyView.setLayoutManager(layoutManager);
     }
@@ -46,25 +46,27 @@ public class PrincipleFeedback extends AppCompatActivity {
         super.onStart();
 
         FirebaseRecyclerOptions<FeedbackModel> options = new FirebaseRecyclerOptions.Builder<FeedbackModel>()
-                .setQuery(myRef,FeedbackModel.class)
+                .setQuery(myRef, FeedbackModel.class)
                 .build();
 
-       FirebaseRecyclerAdapter<FeedbackModel,FeedbackViewHolder> adapter = new FirebaseRecyclerAdapter<FeedbackModel, FeedbackViewHolder>(options) {
-           @Override
-           protected void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position, @NonNull FeedbackModel model) {
-               holder.txtname.setText(model.getName());
-               holder.txtfeedback.setText(model.getFeedback());
-               holder.txttime.setText(model.getTime());
-               holder.txtdate.setText(model.getDate());
-           }
+        FirebaseRecyclerAdapter<FeedbackModel, FeedbackViewHolder> adapter = new FirebaseRecyclerAdapter<FeedbackModel, FeedbackViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position, @NonNull FeedbackModel model) {
+                holder.txtname.setText(model.getName());
+                holder.txtfeedback.setText(model.getFeedback());
+                holder.txttime.setText(model.getTime());
+                holder.txtdate.setText(model.getDate());
 
-           @NonNull
-           @Override
-           public FeedbackViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-               View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.feedback_item,viewGroup,false);
-               return new FeedbackViewHolder(view);
-           }
-       };
+
+            }
+
+            @NonNull
+            @Override
+            public FeedbackViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.feedback_item, viewGroup, false);
+                return new FeedbackViewHolder(view);
+            }
+        };
 
         feedbackRecyView.setAdapter(adapter);
         adapter.startListening();

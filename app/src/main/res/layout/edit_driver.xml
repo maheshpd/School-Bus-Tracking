@@ -9,9 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginRight="5dp"
         android:background="@drawable/fragment_bg">
 
 
@@ -21,10 +18,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:text="Student Register"
+            android:text="Edit Driver"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/closebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:contentDescription="@null"
+            android:padding="10dp"
+            android:src="@drawable/ic_close_black_24dp" />
 
         <View
             android:id="@+id/view1"
@@ -36,76 +44,55 @@
             android:background="#817D7D" />
 
         <EditText
-            android:id="@+id/studentname"
+            android:id="@+id/edtbusno"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_below="@+id/view1"
-            android:layout_alignLeft="@+id/view1"
+            android:layout_alignStart="@+id/view1"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
-            android:hint=" Student Name."
-            android:inputType="text"
+            android:hint="Bus No."
+            android:inputType="text|number"
+            android:paddingStart="10dp"
             android:paddingLeft="10dp" />
 
         <EditText
-            android:id="@+id/stdcls"
+            android:id="@+id/edtdrivername"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_below="@+id/studentname"
+            android:layout_below="@+id/edtbusno"
             android:layout_alignLeft="@+id/view1"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
-            android:hint="Student Class"
+            android:hint="Driver's Name."
             android:inputType="text"
+            android:paddingStart="10dp"
             android:paddingLeft="10dp" />
 
         <EditText
-        android:id="@+id/bsno"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_below="@+id/stdcls"
-        android:layout_alignLeft="@+id/view1"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edt_design"
-        android:hint="Bus No."
-        android:inputType="text"
-        android:paddingLeft="10dp" />
-
-        <EditText
-            android:id="@+id/parnam"
+            android:id="@+id/edtphnno"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_below="@+id/bsno"
+            android:layout_below="@+id/edtdrivername"
             android:layout_alignLeft="@+id/view1"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
-            android:hint="Parent Name."
+            android:hint="Driver's Contact."
             android:inputType="text"
-            android:paddingLeft="10dp" />
-        <EditText
-            android:id="@+id/phnno"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/parnam"
-            android:layout_alignLeft="@+id/view1"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/edt_design"
-            android:hint="Parent E-mail (enter valid email id)."
-            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
             android:paddingLeft="10dp" />
 
         <Button
-            android:id="@+id/stSubmitBtn"
+            android:id="@+id/edtsubmit_btn"
             android:layout_width="200dp"
             android:layout_height="65dp"
-            android:layout_below="@+id/phnno"
+            android:layout_below="@+id/edtphnno"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/submit" />
 
     </RelativeLayout>
