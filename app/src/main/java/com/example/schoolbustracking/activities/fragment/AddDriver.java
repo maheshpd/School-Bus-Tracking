@@ -96,13 +96,13 @@ public class AddDriver extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.child(sdrivername).exists()) {
+                            if (dataSnapshot.child(sbusno).exists()) {
                                 progressDialog.dismiss();
                                 Toast.makeText(context, "Driver name already register", Toast.LENGTH_SHORT).show();
                             } else {
                                 progressDialog.dismiss();
                                 DriverModel driverModel = new DriverModel(sdrivername, spassword, sbusno, sdriverCnt);
-                                myRef.child(sdrivername).setValue(driverModel);
+                                myRef.child(sbusno).setValue(driverModel);
                                 Toast.makeText(context, "Register successfully", Toast.LENGTH_SHORT).show();
 
                                 //Empty edit text

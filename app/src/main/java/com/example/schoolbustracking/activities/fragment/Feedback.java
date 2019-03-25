@@ -4,6 +4,7 @@ package com.example.schoolbustracking.activities.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,8 +16,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.schoolbustracking.R;
+import com.example.schoolbustracking.activities.Model.ParentModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +35,7 @@ public class Feedback extends Fragment {
 
     //Firebase
     FirebaseDatabase database;
-    DatabaseReference myRef;
+    DatabaseReference myRef,table_driver;
 
     //Widget
     EditText nametxt, feedbacktxt;
@@ -57,6 +62,8 @@ public class Feedback extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Feedback");
 
+        //Firebase
+        table_driver = database.getReference("Student");
 
         nametxt = view.findViewById(R.id.feedback_name);
         feedbacktxt = view.findViewById(R.id.feedback_txt);
@@ -88,14 +95,25 @@ public class Feedback extends Fragment {
         sname = nametxt.getText().toString();
         sfeedback = feedbacktxt.getText().toString();
 
-        if (TextUtils.isEmpty(sname)) {
-            Toast.makeText(context, "Enter your name", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(sfeedback)) {
+        if (TextUtils.isEmpty(sfeedback)) {
             Toast.makeText(context, "Enter your feedback", Toast.LENGTH_SHORT).show();
         } else {
             mProgress.setMessage("Please wait...");
             mProgress.setCanceledOnTouchOutside(false);
             mProgress.show();
+
+            table_driver.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ParentModel parentModel = dataSnapshot.child("stparentName").getValue(ParentModel.class);
+                    sname=parentModel.getStparentName();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             Map<String, String> post = new HashMap<>();
             post.put("name", sname);

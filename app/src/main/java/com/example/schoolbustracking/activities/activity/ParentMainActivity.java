@@ -7,8 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.schoolbustracking.R;
+import com.example.schoolbustracking.activities.Utils.Common;
+import com.example.schoolbustracking.activities.Utils.User;
 import com.example.schoolbustracking.activities.fragment.AddDriver;
 import com.example.schoolbustracking.activities.fragment.ChangePassword;
 import com.example.schoolbustracking.activities.fragment.Feedback;
@@ -16,7 +19,8 @@ import com.example.schoolbustracking.activities.fragment.TrackLocation;
 
 public class ParentMainActivity extends AppCompatActivity {
 
-    Button trackBtn,changeBtn,givefeedbackbtn,logoutbtn;
+    Button trackBtn, changeBtn, givefeedbackbtn, logoutbtn;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,10 @@ public class ParentMainActivity extends AppCompatActivity {
         givefeedbackbtn = findViewById(R.id.give_feedback);
         logoutbtn = findViewById(R.id.logout);
 
+        user = new User(ParentMainActivity.this);
+
+        String key = user.getName();
+        Toast.makeText(this, Common.user_name, Toast.LENGTH_SHORT).show();
         getSupportFragmentManager().beginTransaction().replace(R.id.parent_main_container, new TrackLocation()).commit();
 
         trackBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,12 +63,15 @@ public class ParentMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(ParentMainActivity.this, Selection.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
     }
 
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.parentnoticemain, menu);
@@ -76,7 +87,7 @@ public class ParentMainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(ParentMainActivity.this,Notification.class));
+            startActivity(new Intent(ParentMainActivity.this, Notification.class));
             return true;
         }
 

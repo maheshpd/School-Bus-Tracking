@@ -87,7 +87,7 @@
             android:inputType="text"
             android:paddingLeft="10dp" />
         <EditText
-            android:id="@+id/phnno"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_below="@+id/parnam"
@@ -96,6 +96,19 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
             android:hint="Parent E-mail (enter valid email id)."
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:id="@+id/phnno"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/email"
+            android:layout_alignLeft="@+id/view1"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edt_design"
+            android:hint="Parent Phoneno"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp" />
 

@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,12 +34,12 @@ public class RegisterStudent extends Fragment {
     DatabaseReference myRef;
 
     //Widget
-    EditText studentName, studentClass, studentBusNo, studentParentName, studentParentEmail;
+    EditText studentName, studentClass, studentBusNo, studentParentName, studentParentEmail,parentPhoneno;
 
     Context context;
     Button submitBtn;
-    String sstudentname, sstudentClassm, sstudentBusno, sstudentParentName, sstudentParentEmail;
-
+    String sstudentname, sstudentClassm, sstudentBusno, sstudentParentName, sstudentParentEmail,sparentphoneno,spassword;
+    int n;
 
     public RegisterStudent() {
         // Required empty public constructor
@@ -60,8 +61,14 @@ public class RegisterStudent extends Fragment {
         studentClass = view.findViewById(R.id.stdcls);
         studentBusNo = view.findViewById(R.id.bsno);
         studentParentName = view.findViewById(R.id.parnam);
-        studentParentEmail = view.findViewById(R.id.phnno);
+        studentParentEmail = view.findViewById(R.id.email);
         submitBtn = view.findViewById(R.id.stSubmitBtn);
+        parentPhoneno = view.findViewById(R.id.phnno);
+
+        Random random = new Random();
+        n = random.nextInt(999999);
+        spassword = String.valueOf(n);
+
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +78,7 @@ public class RegisterStudent extends Fragment {
                 sstudentClassm = studentClass.getText().toString().trim();
                 sstudentParentName = studentParentName.getText().toString().trim();
                 sstudentParentEmail = studentParentEmail.getText().toString().trim();
+                sparentphoneno = parentPhoneno.getText().toString().trim();
 
                 if (TextUtils.isEmpty(sstudentname)) {
                     Toast.makeText(context, "Enter Student name", Toast.LENGTH_SHORT).show();
@@ -82,7 +90,10 @@ public class RegisterStudent extends Fragment {
                     Toast.makeText(context, "Enter Student's Parent Name", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(sstudentParentEmail)) {
                     Toast.makeText(context, "Enter Student's Parent Email", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if (TextUtils.isEmpty(sparentphoneno)) {
+                    Toast.makeText(context, "Enter phone no", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
                     Map<String, String> student = new HashMap<>();
                     student.put("stname", sstudentname);
@@ -90,16 +101,15 @@ public class RegisterStudent extends Fragment {
                     student.put("stbusno", sstudentBusno);
                     student.put("stparentName", sstudentParentName);
                     student.put("stparentEmail", sstudentParentEmail);
+                    student.put("phone", sparentphoneno);
+                    student.put("password", spassword);
 
-
-                    myRef.push().setValue(student);
+                    myRef.child(sparentphoneno).setValue(student);
                     studentBusNo.setText("");
                     studentName.setText("");
                     studentParentName.setText("");
                     studentParentEmail.setText("");
                     studentClass.setText("");
-
-
                 }
 
             }

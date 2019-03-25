@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.schoolbustracking.R;
+import com.example.schoolbustracking.activities.Utils.User;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Selection extends AppCompatActivity {
-Button principal_btn,parents_btn,driver_btn;
+    Button principal_btn, parents_btn, driver_btn;
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,15 +21,16 @@ Button principal_btn,parents_btn,driver_btn;
 
         FirebaseMessaging.getInstance().subscribeToTopic("Notice");
 
+        user = new User(Selection.this);
 
-        principal_btn=findViewById(R.id.principalbutton);
-        parents_btn=findViewById(R.id.parentbutton);
-        driver_btn=findViewById(R.id.driverbutton);
+        principal_btn = findViewById(R.id.principalbutton);
+        parents_btn = findViewById(R.id.parentbutton);
+        driver_btn = findViewById(R.id.driverbutton);
 
         principal_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Selection.this, PrincipalPage.class));
+                    startActivity(new Intent(Selection.this, PrincipalPage.class));
             }
         });
 
@@ -34,7 +38,7 @@ Button principal_btn,parents_btn,driver_btn;
         parents_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Selection.this, ParentPage.class));
+                    startActivity(new Intent(Selection.this, ParentPage.class));
             }
         });
 
@@ -42,6 +46,7 @@ Button principal_btn,parents_btn,driver_btn;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Selection.this, DriverPage.class));
+
             }
         });
 

@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.schoolbustracking.R;
-import com.example.schoolbustracking.activities.activity.UserMaps;
+import com.example.schoolbustracking.activities.activity.CustomerMapActivity;
+import com.example.schoolbustracking.activities.activity.Welcome;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,7 +39,7 @@ public class TrackLocation extends Fragment {
         trackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, UserMaps.class));
+                startActivity(new Intent(context, CustomerMapActivity.class));
             }
         });
 
