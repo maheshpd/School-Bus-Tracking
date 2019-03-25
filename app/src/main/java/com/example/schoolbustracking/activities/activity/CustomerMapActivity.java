@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.schoolbustracking.R;
+import com.example.schoolbustracking.activities.Model.ParentModel;
 import com.example.schoolbustracking.activities.Utils.Common;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -60,8 +61,8 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     boolean isDriverFound = false;
     String busno;
     int radius = 1; //1 km
-    int distance = 3; //3km
-
+    int distance = 1; //3km
+    private static final int LIMIT = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,29 +100,22 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
             final double latitude = mLastLocation.getLatitude();
             final double longitude = mLastLocation.getLongitude();
 
-            //update To Firebase
-            DatabaseReference driverAvailibilityRef = FirebaseDatabase.getInstance().getReference().child("Student Available");
-            GeoFire geoFire = new GeoFire(driverAvailibilityRef);
 
-            geoFire.setLocation(Common.user_name, new GeoLocation(latitude, longitude), new GeoFire.CompletionListener() {
-                @Override
-                public void onComplete(String key, DatabaseError error) {
-                    //Add Marker
-                    if (mCurrent != null)
-                        mCurrent.remove(); //Remove already marker
-                    mCurrent = mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.child))
-                            .position(new LatLng(latitude, longitude))
-                            .title("Pickup Student From Here"));
+            //Add Marker
+            if (mCurrent != null)
+                mCurrent.remove(); //Remove already marker
+            mCurrent = mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.child))
+                    .position(new LatLng(latitude, longitude))
+                    .title("Pickup Student From Here"));
 
-                    //Move carera to this position
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f));
+            //Move carera to this position
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15.0f));
 
-                    //Drawer animation rotate marker
+            //Drawer animation rotate marker
 //                    rotateMarker(mCurrent, -360, mMap);
-                    loadAllAvailableBus();
-                }
-            });
+            loadAllAvailableBus();
+
         }
     }
 
@@ -133,19 +127,39 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         geoQuery.removeAllListeners();
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void onKeyEntered(String key, GeoLocation location) {
-                if (!isDriverFound) {
-                    isDriverFound = true;
-                    busno = key;
+            public void onKeyEntered(String key, final GeoLocation location) {
+//                if (!isDriverFound) {
+//                    isDriverFound = true;
+//                    busno = key;
+//
+//                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Driver Available").child(busno);
+//                    HashMap driverMap = new HashMap();
+//                    driverMap.put("StudentId", Common.user_name);
+//                    DriverRef.updateChildren(driverMap);
+//
+//                    GettingDriverLocation();
+//                    CallBusDriverButton.setText("Looking for Driver Location...");
+//                }
 
-                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Driver Available").child(busno);
-                    HashMap driverMap = new HashMap();
-                    driverMap.put("StudentId", Common.user_name);
-                    DriverRef.updateChildren(driverMap);
+                FirebaseDatabase.getInstance().getReference()
+                        .child(key)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ParentModel parentModel = dataSnapshot.getValue(ParentModel.class);
 
-                    GettingDriverLocation();
-                    CallBusDriverButton.setText("Looking for Driver Location...");
-                }
+                                //Add driver to map
+                                mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(location.latitude,location.longitude))
+                                .flat(true)
+                                .title("Bus is here"));
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
             }
 
             @Override
@@ -162,7 +176,11 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
             @Override
             public void onGeoQueryReady() {
-
+                    if (distance <=LIMIT) //distance
+                    {
+                        distance++;
+                        loadAllAvailableBus();
+                    }
             }
 
             @Override
@@ -206,7 +224,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                             location.setLongitude(DriverLatLng.longitude);
 
                             float Distance = location1.distanceTo(location);
-                            CallBusDriverButton.setText("Driver Found: "+String.valueOf(Distance));
+                            CallBusDriverButton.setText("Driver Found: " + String.valueOf(Distance));
 
                             DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Bus is here"));
 
@@ -252,6 +270,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
             public void onGeoQueryReady() {
                 if (!isDriverFound) {
                     radius++;
+                    GetDriver();
                 }
             }
 
