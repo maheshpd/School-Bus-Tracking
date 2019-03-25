@@ -32,9 +32,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class CustomerMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -47,7 +52,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     private Location mLastLocation;
     Toolbar mToolbar;
     private Button CallBusDriverButton;
-    private DatabaseReference DriverLocationRef, StudentRef;
+    private DatabaseReference DriverLocationRef, StudentRef, DriverRef, DriverWorkingRef;
     private String studentId;
     private LatLng StudentPickUpLocation;
     Marker mCurrent;
@@ -67,7 +72,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         mToolbar.setTitle("Customer");
 //
         DriverLocationRef = FirebaseDatabase.getInstance().getReference("Driver Available");
-
+        DriverWorkingRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         CallBusDriverButton = findViewById(R.id.callBtn);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -132,6 +137,14 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                 if (!isDriverFound) {
                     isDriverFound = true;
                     busno = key;
+
+                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Driver Available").child(busno);
+                    HashMap driverMap = new HashMap();
+                    driverMap.put("StudentId", Common.user_name);
+                    DriverRef.updateChildren(driverMap);
+
+                    GettingDriverLocation();
+                    CallBusDriverButton.setText("Looking for Driver Location...");
                 }
             }
 
@@ -157,6 +170,26 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
             }
         });
+    }
+
+    private void GettingDriverLocation() {
+        DriverWorkingRef.child(busno).child("l")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+                            double LocationLat = 0;
+                            double LocationLng = 0;
+                            CallBusDriverButton.setText("Driver Found");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
 
