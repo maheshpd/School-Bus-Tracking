@@ -55,7 +55,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     private DatabaseReference DriverLocationRef, StudentRef, DriverRef, DriverWorkingRef;
     private String studentId;
     private LatLng StudentPickUpLocation;
-    Marker mCurrent;
+    Marker mCurrent, DriverMarker;
 
     boolean isDriverFound = false;
     String busno;
@@ -182,6 +182,34 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                             double LocationLat = 0;
                             double LocationLng = 0;
                             CallBusDriverButton.setText("Driver Found");
+
+                            if (driverLocationMap.get(0) != null) {
+                                LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+
+                            }
+                            if (driverLocationMap.get(1) != null) {
+                                LocationLng = Double.parseDouble(driverLocationMap.get(1).toString());
+
+                            }
+
+                            LatLng DriverLatLng = new LatLng(LocationLat, LocationLng);
+                            if (DriverMarker != null) {
+                                DriverMarker.remove();
+                            }
+
+                            Location location1 = new Location("");
+                            location1.setLatitude(StudentPickUpLocation.latitude);
+                            location1.setLongitude(StudentPickUpLocation.longitude);
+
+                            Location location = new Location("");
+                            location.setLatitude(DriverLatLng.latitude);
+                            location.setLongitude(DriverLatLng.longitude);
+
+                            float Distance = location1.distanceTo(location);
+                            CallBusDriverButton.setText("Driver Found: "+String.valueOf(Distance));
+
+                            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Bus is here"));
+
                         }
                     }
 
@@ -274,8 +302,8 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        StudentPickUpLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(StudentPickUpLocation));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
     }
