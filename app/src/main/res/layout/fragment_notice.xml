@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/principle_notice_field"
         android:layout_width="match_parent"
-        android:layout_height="218dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
@@ -26,17 +26,14 @@
         android:id="@+id/principle_notice_post_btn"
         android:layout_width="336dp"
         android:layout_height="54dp"
-        android:layout_marginStart="37dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="403dp"
+        android:layout_marginEnd="35dp"
         android:background="@color/colorAccent"
         android:text="Post"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/principle_notice_field" />
 </android.support.constraint.ConstraintLayout>

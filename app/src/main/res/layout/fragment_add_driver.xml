@@ -73,7 +73,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
             android:hint="Driver's Contact."
-            android:inputType="text"
+            android:inputType="phone"
             android:paddingStart="10dp"
             android:paddingLeft="10dp" />
 

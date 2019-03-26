@@ -16,21 +16,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.schoolbustracking.R;
 import com.example.schoolbustracking.activities.Model.DriverModel;
+import com.example.schoolbustracking.activities.Utils.Common;
 import com.example.schoolbustracking.activities.ViewHolder.DriverViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BusDetails extends Fragment {
 
-    DatabaseReference myRef;
+    DatabaseReference myRef, update;
     RecyclerView driverdetailsRecyView;
 
     Context context;
@@ -39,6 +45,8 @@ public class BusDetails extends Fragment {
     EditText busno, drivername, phoneno;
     Button edt_submit;
     ImageView closebtn;
+
+    String sbusno, sdrivername, sdrivercontact;
 
     public BusDetails() {
         // Required empty public constructor
@@ -80,6 +88,7 @@ public class BusDetails extends Fragment {
                 holder.busno.setText("Bus No: " + model.getBusno());
                 holder.drivername.setText("Driver name: " + model.getName());
                 holder.contactno.setText("Contact No: " + model.getPhone());
+
                 holder.edtBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,10 +112,27 @@ public class BusDetails extends Fragment {
                         busno.setText(model.getBusno());
                         drivername.setText(model.getName());
                         phoneno.setText(model.getPhone());
+                        edt_submit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sbusno = busno.getText().toString().trim();
+                                sdrivername = drivername.getText().toString().trim();
+                                sdrivercontact = phoneno.getText().toString().trim();
+
+
+                                DriverModel driverModel = new DriverModel(sbusno,sdrivername,sdrivercontact);
+
+
+                                update = FirebaseDatabase.getInstance().getReference().child("Driver").child(sbusno);
+                                update.setValue(driverModel);
+                                Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                edtDialog.dismiss();
+
+                            }
+                        });
 
                     }
                 });
-
 
 
             }
@@ -124,4 +150,5 @@ public class BusDetails extends Fragment {
 
 
     }
+
 }

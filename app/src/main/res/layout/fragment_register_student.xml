@@ -108,7 +108,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
-            android:hint="Parent Phoneno"
+            android:hint="Parent Phone no"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp" />
 

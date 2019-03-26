@@ -33,12 +33,13 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginRight="50dp"
             android:background="#ffffff"
-            android:paddingLeft="10dp"
             android:inputType="text"
+            android:paddingLeft="10dp"
             android:textColor="@android:color/black" />
     </LinearLayout>
 
@@ -60,12 +61,13 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/userpass"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginRight="50dp"
-            android:paddingLeft="10dp"
             android:background="#ffffff"
             android:inputType="text"
+            android:paddingLeft="10dp"
             android:textColor="@android:color/black" />
     </LinearLayout>
 
@@ -73,25 +75,16 @@
         android:id="@+id/loginbtn"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@drawable/btndesign"
-        android:layout_marginRight="42dp"
-        android:layout_marginLeft="42dp"
-        android:text="Login"
-        android:textSize="30sp"
-        android:textAllCaps="false"
-        android:drawableRight="@drawable/multimedia"
         android:layout_below="@+id/lin2"
-        android:paddingRight="10dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="42dp"
+        android:background="@drawable/btndesign"
+        android:drawableRight="@drawable/multimedia"
         android:onClick="mainPage"
-        android:layout_marginTop="50dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#D74B4B"
-        android:text="Forgot Password"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:text="Login"
         android:textAllCaps="false"
-
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_below="@+id/loginbtn"
-        android:layout_alignRight="@+id/loginbtn"/>
+        android:textSize="30sp" />
 </RelativeLayout>

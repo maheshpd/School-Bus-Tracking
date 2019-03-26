@@ -24,6 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
 
 /**
@@ -99,6 +103,7 @@ public class AddDriver extends Fragment {
                             if (dataSnapshot.child(sbusno).exists()) {
                                 progressDialog.dismiss();
                                 Toast.makeText(context, "Driver name already register", Toast.LENGTH_SHORT).show();
+                                sendSmsToDriver();
                             } else {
                                 progressDialog.dismiss();
                                 DriverModel driverModel = new DriverModel(sdrivername, spassword, sbusno, sdriverCnt);
@@ -122,6 +127,33 @@ public class AddDriver extends Fragment {
             }
         });
         return view;
+    }
+
+    private void sendSmsToDriver() {
+        try {
+            // Construct data
+            String apiKey = "apikey=" + "tvKMKzwIkXg-97fTiH5LL65hQJgaflvmWojsJ7B88R";
+            String message = "&message=" + "Your Bus no is" + sbusno + "and password is" + spassword;
+            String sender = "&sender=" + "TXTLCL";
+            String numbers = "&numbers=" + sdriverCnt;
+
+            // Send data
+            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+            String data = apiKey + numbers + message + sender;
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+            conn.getOutputStream().write(data.getBytes("UTF-8"));
+            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            final StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                Toast.makeText(context, line.toString(), Toast.LENGTH_SHORT).show();
+            }
+            rd.close();
+        } catch (Exception e) {
+
+        }
     }
 
 }

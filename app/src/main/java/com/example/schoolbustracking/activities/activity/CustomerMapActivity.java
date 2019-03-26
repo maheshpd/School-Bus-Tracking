@@ -83,10 +83,11 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 loadAllAvailableBus();
+                GetDriver();
             }
         });
 
-//        GetDriver();
+
     }
 
     private void displayCustomerLocation() {
@@ -115,7 +116,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
             //Drawer animation rotate marker
 //                    rotateMarker(mCurrent, -360, mMap);
             loadAllAvailableBus();
-
+            GetDriver();
         }
     }
 
@@ -161,6 +162,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                             }
                         });
             }
+
 
             @Override
             public void onKeyExited(String key) {
