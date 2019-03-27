@@ -1,10 +1,12 @@
 package com.example.schoolbustracking.activities.fragment;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,11 +36,11 @@ public class RegisterStudent extends Fragment {
     DatabaseReference myRef;
 
     //Widget
-    EditText studentName, studentClass, studentBusNo, studentParentName, studentParentEmail,parentPhoneno;
+    EditText studentName, studentClass, studentBusNo, studentParentName, studentParentEmail, parentPhoneno;
 
     Context context;
     Button submitBtn;
-    String sstudentname, sstudentClassm, sstudentBusno, sstudentParentName, sstudentParentEmail,sparentphoneno,spassword;
+    String sstudentname, sstudentClassm, sstudentBusno, sstudentParentName, sstudentParentEmail, sparentphoneno, spassword;
     int n;
 
     public RegisterStudent() {
@@ -90,10 +92,9 @@ public class RegisterStudent extends Fragment {
                     Toast.makeText(context, "Enter Student's Parent Name", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(sstudentParentEmail)) {
                     Toast.makeText(context, "Enter Student's Parent Email", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(sparentphoneno)) {
+                } else if (TextUtils.isEmpty(sparentphoneno)) {
                     Toast.makeText(context, "Enter phone no", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
 
                     Map<String, String> student = new HashMap<>();
                     student.put("stname", sstudentname);
@@ -110,6 +111,8 @@ public class RegisterStudent extends Fragment {
                     studentParentName.setText("");
                     studentParentEmail.setText("");
                     studentClass.setText("");
+                    parentPhoneno.setText("");
+                    sendSmsToDriver();
                 }
 
             }
@@ -119,4 +122,13 @@ public class RegisterStudent extends Fragment {
         return view;
     }
 
+
+    private void sendSmsToDriver() {
+
+        String message = "This message is from School Bus Tracking. Your child Bus no is "+ sstudentBusno +" and " + spassword + " is your login password";
+        String numbers = sparentphoneno;
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(numbers, null, message, null, null);
+
+    }
 }

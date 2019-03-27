@@ -34,6 +34,7 @@
 
         <EditText
             android:id="@+id/username"
+            android:text="q"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginRight="50dp"
@@ -67,6 +68,7 @@
             android:layout_marginRight="50dp"
             android:background="#ffffff"
             android:inputType="text"
+            android:text="1"
             android:paddingLeft="10dp"
             android:textColor="@android:color/black" />
     </LinearLayout>
@@ -81,7 +83,6 @@
         android:layout_marginRight="42dp"
         android:background="@drawable/btndesign"
         android:drawableRight="@drawable/multimedia"
-        android:onClick="mainPage"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
         android:text="Login"

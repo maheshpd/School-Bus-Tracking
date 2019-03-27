@@ -10,7 +10,7 @@ import com.example.schoolbustracking.R;
 
 public class DriverViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView busno, drivername, contactno;
+    public TextView busno, drivername, contactno,password;
     public Button edtBtn;
     public DriverViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,6 +19,7 @@ public class DriverViewHolder extends RecyclerView.ViewHolder {
         drivername = itemView.findViewById(R.id.drivername);
         contactno = itemView.findViewById(R.id.contactno);
         edtBtn = itemView.findViewById(R.id.editBtn);
+        password = itemView.findViewById(R.id.password);
 
     }
 }

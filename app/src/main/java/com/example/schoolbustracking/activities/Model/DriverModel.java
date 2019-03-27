@@ -7,12 +7,6 @@ public class DriverModel {
     }
 
 
-    public DriverModel(String name, String busno, String phone) {
-        this.name = name;
-        this.busno = busno;
-        this.phone = phone;
-    }
-
     public DriverModel(String name, String password, String busno, String phone) {
         this.name = name;
         this.password = password;

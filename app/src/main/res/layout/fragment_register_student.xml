@@ -109,7 +109,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
             android:hint="Parent Phone no"
-            android:inputType="textEmailAddress"
+            android:inputType="phone"
             android:paddingLeft="10dp" />
 
         <Button

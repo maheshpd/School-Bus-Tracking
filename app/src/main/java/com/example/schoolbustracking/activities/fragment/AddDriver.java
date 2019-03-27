@@ -1,11 +1,16 @@
 package com.example.schoolbustracking.activities.fragment;
 
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +54,9 @@ public class AddDriver extends Fragment {
     String sbusno, sdrivername, sdriverCnt, spassword;
     int n;
 
+    private final static int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
+
+
     public AddDriver() {
         // Required empty public constructor
     }
@@ -66,6 +74,13 @@ public class AddDriver extends Fragment {
         edt_driveCnt = view.findViewById(R.id.phnno);
         btnSubmit = view.findViewById(R.id.submit_btn);
         progressDialog = new ProgressDialog(context);
+
+
+        if (checkPermission(Manifest.permission.SEND_SMS)) {
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_CODE);
+        }
 
 
         Random random = new Random();
@@ -102,7 +117,7 @@ public class AddDriver extends Fragment {
 
                             if (dataSnapshot.child(sbusno).exists()) {
                                 progressDialog.dismiss();
-                                Toast.makeText(context, "Driver name already register", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Bus No already register", Toast.LENGTH_SHORT).show();
                                 sendSmsToDriver();
                             } else {
                                 progressDialog.dismiss();
@@ -129,31 +144,58 @@ public class AddDriver extends Fragment {
         return view;
     }
 
-    private void sendSmsToDriver() {
-        try {
-            // Construct data
-            String apiKey = "apikey=" + "tvKMKzwIkXg-97fTiH5LL65hQJgaflvmWojsJ7B88R";
-            String message = "&message=" + "Your Bus no is" + sbusno + "and password is" + spassword;
-            String sender = "&sender=" + "TXTLCL";
-            String numbers = "&numbers=" + sdriverCnt;
-
-            // Send data
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
-            String data = apiKey + numbers + message + sender;
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-            conn.getOutputStream().write(data.getBytes("UTF-8"));
-            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            final StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                Toast.makeText(context, line.toString(), Toast.LENGTH_SHORT).show();
-            }
-            rd.close();
-        } catch (Exception e) {
-
-        }
+    private boolean checkPermission(String permission) {
+        int checkPermission = ContextCompat.checkSelfPermission(context, permission);
+        return checkPermission == PackageManager.PERMISSION_GRANTED;
     }
 
+    private void sendSmsToDriver() {
+
+        if (checkPermission(Manifest.permission.SEND_SMS)) {
+            String message = "This message is from School Bus Tracking. Your Bus no is " + sbusno + " and password is " + spassword;
+            String numbers = sdriverCnt;
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(numbers, null, message, null, null);
+
+        } else {
+            Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show();
+        }
+
+
+//        try {
+//            // Construct data
+//            String apiKey = "apikey=" + "tvKMKzwIkXg-97fTiH5LL65hQJgaflvmWojsJ7B88R";
+//            String message = "&message=" + "Your Bus no is" + sbusno + "and password is" + spassword;
+//            String sender = "&sender=" + "TXTLCL";
+//            String numbers = "&numbers=" + sdriverCnt;
+//
+//            // Send data
+//            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+//            String data = apiKey + numbers + message + sender;
+//            conn.setDoOutput(true);
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+//            conn.getOutputStream().write(data.getBytes("UTF-8"));
+//            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            final StringBuffer stringBuffer = new StringBuffer();
+//            String line;
+//            while ((line = rd.readLine()) != null) {
+//                Toast.makeText(context, line.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//            rd.close();
+//        } catch (Exception e) {
+//
+//        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case SEND_SMS_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)){
+
+                }
+                break;
+        }
+    }
 }

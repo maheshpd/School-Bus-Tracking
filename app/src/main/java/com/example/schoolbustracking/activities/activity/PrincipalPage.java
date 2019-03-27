@@ -3,9 +3,12 @@ package com.example.schoolbustracking.activities.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.schoolbustracking.R;
 import com.example.schoolbustracking.activities.Utils.User;
@@ -37,11 +40,15 @@ public class PrincipalPage extends AppCompatActivity {
     }
 
     private void loginUser() {
-
-    }
-
-    public void mainPage(View view) {
-        startActivity(new Intent(PrincipalPage.this, MainActivity.class));
+        susername = username.getText().toString().trim();
+        userpass = password.getText().toString().trim();
+        if (TextUtils.isEmpty(susername)) {
+            Toast.makeText(this, "Enter username", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(userpass)) {
+            Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show();
+        } else {
+            startActivity(new Intent(PrincipalPage.this, MainActivity.class));
+        }
     }
 
 }

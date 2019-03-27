@@ -52,6 +52,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edt_design"
+            android:enabled="false"
             android:hint="Bus No."
             android:inputType="text|number"
             android:paddingStart="10dp"
@@ -69,7 +70,10 @@
             android:hint="Driver's Name."
             android:inputType="text"
             android:paddingStart="10dp"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp">
+
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id="@+id/edtphnno"
@@ -84,6 +88,11 @@
             android:inputType="text"
             android:paddingStart="10dp"
             android:paddingLeft="10dp" />
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
 
         <Button
             android:id="@+id/edtsubmit_btn"
