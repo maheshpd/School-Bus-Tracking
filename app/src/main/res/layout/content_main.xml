@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imag"
             android:background="#BBB4B4"
+
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="4">

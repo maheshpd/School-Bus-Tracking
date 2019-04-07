@@ -30,7 +30,7 @@ public class Selection extends AppCompatActivity {
         principal_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(Selection.this, PrincipalPage.class));
+                startActivity(new Intent(Selection.this, PrincipalPage.class));
             }
         });
 
@@ -38,7 +38,7 @@ public class Selection extends AppCompatActivity {
         parents_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(Selection.this, ParentPage.class));
+                startActivity(new Intent(Selection.this, ParentPage.class));
             }
         });
 

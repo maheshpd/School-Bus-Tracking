@@ -37,6 +37,7 @@ public class PrincipleFeedback extends AppCompatActivity {
         //Widget
         feedbackRecyView = findViewById(R.id.feedback_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        layoutManager.setStackFromEnd(true);
         feedbackRecyView.setLayoutManager(layoutManager);
     }
@@ -56,8 +57,6 @@ public class PrincipleFeedback extends AppCompatActivity {
                 holder.txtfeedback.setText(model.getFeedback());
                 holder.txttime.setText(model.getTime());
                 holder.txtdate.setText(model.getDate());
-
-
             }
 
             @NonNull

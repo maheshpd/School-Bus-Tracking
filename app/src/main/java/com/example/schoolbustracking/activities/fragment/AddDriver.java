@@ -40,10 +40,11 @@ import java.util.Random;
  */
 public class AddDriver extends Fragment {
 
-    //Firebase
+    //Start Firebase
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseAuth mAuth;
+//End Firebase
 
     //Widget
     EditText edt_busno, edt_drivername, edt_driveCnt;
@@ -75,7 +76,7 @@ public class AddDriver extends Fragment {
         btnSubmit = view.findViewById(R.id.submit_btn);
         progressDialog = new ProgressDialog(context);
 
-
+        //For sms
         if (checkPermission(Manifest.permission.SEND_SMS)) {
 
         } else {
@@ -96,13 +97,11 @@ public class AddDriver extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Please wait...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
 
-                sbusno = edt_busno.getText().toString();
-                sdrivername = edt_drivername.getText().toString();
-                sdriverCnt = edt_driveCnt.getText().toString();
+
+                sbusno = edt_busno.getText().toString().trim();
+                sdrivername = edt_drivername.getText().toString().trim();
+                sdriverCnt = edt_driveCnt.getText().toString().trim();
 
                 if (TextUtils.isEmpty(sbusno)) {
                     Toast.makeText(context, "Enter bus no", Toast.LENGTH_SHORT).show();
@@ -111,6 +110,9 @@ public class AddDriver extends Fragment {
                 } else if (TextUtils.isEmpty(sdriverCnt)) {
                     Toast.makeText(context, "Enter driver Contact no", Toast.LENGTH_SHORT).show();
                 } else {
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
                     myRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -118,13 +120,13 @@ public class AddDriver extends Fragment {
                             if (dataSnapshot.child(sbusno).exists()) {
                                 progressDialog.dismiss();
                                 Toast.makeText(context, "Bus No already register", Toast.LENGTH_SHORT).show();
-                                sendSmsToDriver();
+
                             } else {
                                 progressDialog.dismiss();
                                 DriverModel driverModel = new DriverModel(sdrivername, spassword, sbusno, sdriverCnt);
                                 myRef.child(sbusno).setValue(driverModel);
                                 Toast.makeText(context, "Register successfully", Toast.LENGTH_SHORT).show();
-
+                                sendSmsToDriver();
                                 //Empty edit text
                                 edt_busno.setText("");
                                 edt_drivername.setText("");

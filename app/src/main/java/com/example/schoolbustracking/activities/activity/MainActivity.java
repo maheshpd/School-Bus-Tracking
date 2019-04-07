@@ -2,10 +2,6 @@ package com.example.schoolbustracking.activities.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,7 +12,6 @@ import android.widget.Button;
 import com.example.schoolbustracking.R;
 import com.example.schoolbustracking.activities.fragment.AddDriver;
 import com.example.schoolbustracking.activities.fragment.BusDetails;
-import com.example.schoolbustracking.activities.fragment.Feedback;
 import com.example.schoolbustracking.activities.fragment.Notice;
 import com.example.schoolbustracking.activities.fragment.RegisterStudent;
 import com.google.firebase.FirebaseApp;
@@ -33,13 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("School Bus Tacking");
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         FirebaseApp.initializeApp(MainActivity.this);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddDriver()).commit();
-
-
-
         Add_drv = findViewById(R.id.adddrvbtn);
         regstd = findViewById(R.id.std_reg_btn);
         Bus_dtls = findViewById(R.id.bs_det);
@@ -96,9 +88,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 }

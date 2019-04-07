@@ -28,9 +28,7 @@ public class PrincipalPage extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.userpass);
         login = findViewById(R.id.loginbtn);
-
         user = new User(this);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +36,6 @@ public class PrincipalPage extends AppCompatActivity {
             }
         });
     }
-
     private void loginUser() {
         susername = username.getText().toString().trim();
         userpass = password.getText().toString().trim();
@@ -47,7 +44,11 @@ public class PrincipalPage extends AppCompatActivity {
         } else if (TextUtils.isEmpty(userpass)) {
             Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show();
         } else {
-            startActivity(new Intent(PrincipalPage.this, MainActivity.class));
+            if (susername.equals("admin") && userpass.equals("admin")) {
+                startActivity(new Intent(PrincipalPage.this, MainActivity.class));
+            } else {
+                Toast.makeText(this, "Invalid username and password", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
